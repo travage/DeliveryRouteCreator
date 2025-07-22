@@ -4,7 +4,6 @@ class HashTable:
     def __init__(self, num_of_packages):
         # Prime bucket sizes to help more evenly distribute keys
         # If there are more than ~1.1 million packages, additional prime bucket sizes are needed
-        # TODO: Add check to warn of this ^
         self.prime_sizes = [
             7, 17, 37, 53, 97, 193, 389,
             769, 1543, 3079, 6151, 12289,
@@ -29,22 +28,25 @@ class HashTable:
         self.size = 0
 
     def insert(self, key, value):
-        index = key % len(self.table)
-        bucket = self.table[index]
+        if self.size >= 1100000:
+            print('Maximum number of packages is 1.1 million, no more packages can be added')
+        else:
+            index = key % len(self.table)
+            bucket = self.table[index]
 
-        # Check if bucket already contains key; if so, update it with new value
-        for i, (k, v) in enumerate(bucket):
-            if k == key:
-                bucket[i] = (key, value)
-                return
+            # Check if bucket already contains key; if so, update it with new value
+            for i, (k, v) in enumerate(bucket):
+                if k == key:
+                    bucket[i] = (key, value)
+                    return
 
-        # If bucket doesn't contain key, add key-value pair as a tuple
-        bucket.append((key, value))
-        self.size += 1
+            # If bucket doesn't contain key, add key-value pair as a tuple
+            bucket.append((key, value))
+            self.size += 1
 
-        # Check load factor and resize if above 0.7
-        if (self.size / len(self.table)) > 0.7:
-            self.resize()
+            # Check load factor and resize if above 0.7
+            if (self.size / len(self.table)) > 0.7:
+                self.resize()
 
     # Prevents endless recursion loop when resize() needs to rehash the values
     def insert_without_resize(self, key, value):

@@ -1,6 +1,3 @@
-from status import Status
-
-
 class Package:
     def __init__(self, package_ID, address, city, zip, deadline, weight, specific_truck, delayed_arrival,
                  correct_address, correct_city, correct_zip, must_be_with, status):
@@ -17,6 +14,8 @@ class Package:
         self.correct_zip = correct_zip
         self.must_be_with = must_be_with
         self.status = status
+        self.delivered_timestamp = None
+        self.assigned_truck = None
 
     def __str__(self):
         return str(vars(self))
