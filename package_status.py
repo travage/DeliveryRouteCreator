@@ -1,7 +1,7 @@
 from enum import Enum
 
-class Status(Enum):
+class PackageStatus(Enum):
     AT_HUB = 'At Hub'
-    EN_ROUTE = 'En Route'
+    EN_ROUTE = 'En route'
     DELIVERED = 'Delivered'
     DELAYED = 'Delayed'
