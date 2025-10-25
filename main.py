@@ -1,4 +1,3 @@
-# Student ID: 002854304
 from hashtable import HashTable
 from package import Package
 from package_status import PackageStatus
